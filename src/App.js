@@ -11,27 +11,27 @@ function App() {
         </div>
         <div>
           <form >
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-2">
               <input type="email " class="form-control" id="floatingInput" placeholder="name@example.com"/>
               <label for="floatingInput">Email address</label>
             </div>
 
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-2">
                 <input type="password" className="form-control" id="floatingPass" placeholder="Create strong password"/>
                 <label for="floatingPass">Create Password:</label>
             </div>
 
-           <div className="form-floating mb-3"> 
+           <div className="form-floating mb-2"> 
                 <input type="password" className="form-control" id="confirmPass"  placeholder="Confirm password" />
                 <label for="confirmPass">Confirm Password:</label>
            </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-2">
               <input type="tel" className="form-control" id="lblMobile" placeholder="Enter  your mobile number"/>
               <label for="lblMobile">Mobile Number:</label>
             </div>
             
             
-          <div className="form-floating mb-3"> <input type="text" className="form-control" id="lblShippingAddress" placeholder="Enter  your shipping address"/>
+          <div className="form-floating mb-2"> <input type="text" className="form-control" id="lblShippingAddress" placeholder="Enter  your shipping address"/>
             <label for="lblShippingAddress">Shipping address:</label>
           </div>
            
