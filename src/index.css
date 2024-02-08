@@ -30,6 +30,8 @@ label {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin: 2%;
   width: 60%;
+  background: hsl(0%, 0%, 0.60);
+  backdrop-filter: blur(10px);
 }
 
 .title {
@@ -49,3 +51,23 @@ label {
 form {
   margin: 5%;
 }
+ .primaryBtn{
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid skyblue;
+  padding: 14px 40px;
+  outline: none;
+  border-radius: 14px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer
+}
+
+.primaryBtn:hover{
+  background-color:skyblue;
+  color: #fff;
+  transform: scale(1.1);
+}
+
