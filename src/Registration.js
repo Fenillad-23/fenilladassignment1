@@ -1,18 +1,20 @@
 import "./App.css";
 
-
+import { Link } from "react-router-dom";
 function Registration() {
-  
+
   const createUser = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = document.getElementById("form");
+    const formData = new FormData(form.target);
     const userInfo = 
      {
-        email: formData.get("email"),
-        password: formData.get("password"),
-        confirmPassword: formData.get("confirmPass"),
-        contactNumber: formData.get("contactNumber"),
-        terms: formData.get("terms"),
+        email: formData.target.get("email"),
+        password: formData.target.get("password"),
+        confirmPassword: formData.target.get("confirmPass"),
+        contactNumber: formData.target.get("contactNumber"),
+        shippingAddress : formData.target.get("shippingAddress"),
+        terms: formData.target.get("terms"),
       };
     if ( userInfo.email === "" || userInfo.password === "" || userInfo.contactNumber === "" || userInfo.confirmPassword === "" || userInfo.terms!='on') {
       alert("Please fill out all fields");
@@ -40,7 +42,7 @@ function Registration() {
           </div>
 
           <div className="col md-9" id="inputForm">
-            <form onSubmit={createUser}>
+            <form id="form" >
               <div class="form-floating mb-2">
                 <input
                   type="email"
@@ -101,21 +103,19 @@ function Registration() {
               <br></br>
               <div className="row btn-wrapper">
                 <button
-                  // onClick={(e) => alert("Account Created")}
+                type="submit"
+                   onClick={createUser}
                   className="primaryBtn"
-                  id="btnRegister"
-                >
+                  id="btnRegister">
                   <img src="add-user.png" height={20} />&nbsp;&nbsp;
                   Sign Up
                 </button>
-                <button
-                  
-                  className="primaryBtn"
-                  id="btnLogin"
-                >
-                  <img src="login.png" height={20} />
-                  &nbsp;&nbsp; Sign In
-                </button>
+                <Link  className="noStyleLink" to="/login">
+                    <button className="primaryBtn" id="btnLogin">
+                      <img src="login.png" height={20} />
+                      &nbsp;Sign In
+                    </button>
+                  </Link>
               </div>
             </form>
           </div>
