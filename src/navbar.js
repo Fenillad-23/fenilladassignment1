@@ -3,7 +3,6 @@ import { Link,Switch,Router } from "react-router-dom";
 
 
 function Appbar() {
- 
   return (
     <nav class="navbar">
     
@@ -23,13 +22,10 @@ function Appbar() {
         right: "8%",
       }}
     >
-      <a href="#home">Home</a>
-      <a href="#link">MyCart</a>
-      <a href="About">About</a>
-      <input
+       <input
         type="search product"
         className="form-control"
-        style={{ height: "40px" }}
+        style={{ height: "40px", width:"550px" }}
         placeholder="Search"
       ></input>
       &nbsp;&nbsp;
@@ -40,16 +36,21 @@ function Appbar() {
           textAlign: "center",
           justifyContent: "center",
           justifyItems: "center",
+          marginRight:"100px"
         }}
-        class="btn btn-outline-primary"
+        class="btn btn-outline-info"
       >
         search
       </button>
+      <a href="#home">Home</a>
+      <a href="#link">MyCart</a>
+      <a href="About">About</a>
+     
     </div>
 
-    <div class="user-profile">
+    <div class="user-profile" style={{marginBottom:"23px"}}>
       <span class="user-icon">👤</span>
-      <Link to="/login" className="noStyleLink">Login</Link>
+      <Link to="/login" className="noStyleLink" >Login</Link>
       {/* <span class="user-name">Fenil Lad</span> */}
     </div>
     
