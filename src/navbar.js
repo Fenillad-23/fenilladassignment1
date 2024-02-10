@@ -1,6 +1,6 @@
 import React from "react";
 import { Link,Switch,Router } from "react-router-dom";
-
+import { NavLink } from "react-bootstrap";
 
 function Appbar() {
   return (
@@ -42,9 +42,11 @@ function Appbar() {
       >
         search
       </button>
-      <a href="#home">Home</a>
-      <a href="#link">MyCart</a>
-      <a href="About">About</a>
+      
+      <NavLink href='/home'>Home</NavLink>
+      <NavLink href='/ProductInfo'>MyCart</NavLink>
+      <NavLink href="About">About</NavLink>
+      
      
     </div>
 
