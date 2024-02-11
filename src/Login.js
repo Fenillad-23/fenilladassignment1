@@ -2,12 +2,27 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import React from "react";
 
-// import { useNavigate } from 'react-router-dom';
 function Login() {
-  // const navigate = useNavigate();
-  // const Goto = (route) => {
-  //   navigate(route);
-  // };
+  const singinUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const userInfo = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    if (
+      userInfo.email === "Fenillad087@gmail.com" ||
+      userInfo.password === "Fenil@2310"
+    ) {
+      localStorage.setItem("username", "Fenillad087@gmail.com");
+      window.location.href ="/home"
+    }else {
+      alert(
+        "user not found\nhint\nuser name : Fenillad087@gmail.com   \npassword: Fenil@2310 "
+      );
+    }
+  };
   return (
     <>
       <div className="mainDiv">
@@ -23,7 +38,7 @@ function Login() {
             </div>
 
             <div className="col md-9" id="inputForm">
-              <form>
+              <form onSubmit={singinUser}>
                 <div class="form-floating mb-2">
                   <input
                     type="email"
@@ -38,27 +53,45 @@ function Login() {
                   <input
                     type="password"
                     className="form-control"
-                    id="confirmPass"
-                    name="confirmPass"
-                    placeholder="Confirm password"
+                    id="password"
+                    name="password"
+                    placeholder="password"
                   />
-                  <label for="confirmPass">Confirm Password:</label>
+                  <label for="password">Confirm Password:</label>
                 </div>
+                <a href="#" style={{ float: "right" }}>
+                  Forget Password
+                </a>
                 <br></br>
                 <div>
-                  <Link  className="noStyleLink" to="/home">
-                    <button className="primaryBtn" id="btnLogin">
-                      <img src="login.png" height={20} />
-                      &nbsp;Sign In
+                  <button
+                    type="submit"
+                    className="primaryBtn"
+                    id="btnLogin"
+                    style={{ width: "100%" }}
+                  >
+                    <img src="login.png" height={20} />
+                    &nbsp;Sign In
+                  </button>
+                  <div className="or" style={{ display: "flex", flex: "1" }}>
+                    <hr style={{ width: "45%" }} />
+                    &nbsp;<p class="or">or</p>&nbsp;
+                    <hr style={{ width: "45%" }} />
+                  </div>
+                  <Link className="noStyleLink">
+                    <button type="button" className="signupBtn">
+                      <i
+                        className="fa fa-google"
+                        style={{ color: "blueviolet" }}
+                      ></i>{" "}
+                      Sign In with Google
                     </button>
                   </Link>
-                  <div className="or" style={{ display:"flex",  flex :"1"}}>
-                   <hr style={{width:"45%"}}/>&nbsp;<p class="or">or</p>&nbsp;<hr style={{width:"45%"}}/>
-                  </div>
-                  <Link  to="/register" className="noStyleLink">
-                    <button className="primaryBtn" id="btnRegister">
+                  &nbsp;&nbsp;&nbsp;
+                  <Link to="/register" className="noStyleLink">
+                    <button className="signupBtn" id="btnRegister">
                       <img src="add-user.png" height={20} />
-                      &nbsp; Sign Up
+                      &nbsp;Sign Up
                     </button>
                   </Link>
                 </div>

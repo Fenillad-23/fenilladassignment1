@@ -3,14 +3,15 @@ import "./App.css";
 import Nav from "./Appbar";
 
 function Cart() {
+    let  finalCost = 0;
   const [cartProduct, setCart] = useState([]);
   const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0);
+  let [discount, setDiscount] = useState(0);
   useEffect(() => {
     const CartProducts = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(CartProducts);
   }, []);
-  const quantity = 0 ;
+ 
   const removeFromCart = (index) => {
     const updatedCart = [...cartProduct];
     updatedCart.splice(index, 1);
@@ -20,7 +21,11 @@ function Cart() {
 
   const applyCoupon = () => {
     if (coupon === "SALE20") {
-      setDiscount(0.2);
+        discount = 0.2 ;
+      setDiscount(discount);
+     const discountAmount = discount * calculateTotalPrice();
+    finalCost = calculateTotalPrice() - discountAmount;
+      alert(`You got a 20% discount! Your total price is ${finalCost}`);
     }
   };
 
@@ -114,7 +119,7 @@ function Cart() {
           </div>
           <div className="row">
             <div className="col-md-6  offset-md-3 text-center totalPrice">
-              <h4>Total Price: ${calculateTotalPrice()}</h4>
+              <h4>Total Price: ${finalCost == 0 ?  calculateTotalPrice():finalCost}</h4>
             </div>
           </div>
         </div>

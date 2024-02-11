@@ -5,23 +5,24 @@ function Registration() {
 
   const createUser = (e) => {
     e.preventDefault();
-    const form = document.getElementById("form");
-    const formData = new FormData(form.target);
-    const userInfo = 
-     {
-        email: formData.target.get("email"),
-        password: formData.target.get("password"),
-        confirmPassword: formData.target.get("confirmPass"),
-        contactNumber: formData.target.get("contactNumber"),
-        shippingAddress : formData.target.get("shippingAddress"),
-        terms: formData.target.get("terms"),
-      };
+    const form = e.target;
+    const formData = new FormData(form);
+    const userInfo = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      confirmPassword: formData.get("confirmPass"),
+      contactNumber: formData.get("contactNumber"),
+      shippingAddress: formData.get("shippingAddress"),
+      terms: formData.get("terms"),
+    };
     if ( userInfo.email === "" || userInfo.password === "" || userInfo.contactNumber === "" || userInfo.confirmPassword === "" || userInfo.terms!='on') {
       alert("Please fill out all fields");
     } else {
-      alert("all fields filled successfully!"+userInfo.email);
+      // alert("all fields filled successfully!"+userInfo.email);
       if(userInfo.password !== userInfo.confirmPassword){
         return alert('Passwords do not match')
+      }else{
+        window.location.href = "/home";
       }
 
     }
@@ -42,7 +43,7 @@ function Registration() {
           </div>
 
           <div className="col md-9" id="inputForm">
-            <form id="form" >
+            <form id="form" onSubmit={createUser}>
               <div class="form-floating mb-2">
                 <input
                   type="email"
@@ -104,7 +105,7 @@ function Registration() {
               <div className="row btn-wrapper">
                 <button
                 type="submit"
-                   onClick={createUser}
+
                   className="primaryBtn"
                   id="btnRegister">
                   <img src="add-user.png" height={20} />&nbsp;&nbsp;

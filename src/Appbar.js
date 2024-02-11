@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 
 
 function Appbar() {
+  const username = localStorage.getItem("username") || "";
+
   return (
     <nav class="navbar">
     
@@ -46,12 +48,12 @@ function Appbar() {
       <a href="/home" className="noStyleLink" >Home</a>
       <Link to="/cart" className="noStyleLink" >Cart</Link>
       <a href="/About" className="noStyleLink" >About</a>
-      <Link to="/profile" className="noStyleLink" >Edit profile</Link>
+      <Link to="/profile" className="noStyleLink" style={{marginRight:"90px"}}>Edit profile</Link>
     </div>
 
-    <div class="user-profile" style={{marginBottom:"23px"}}>
+    <div class="user-profile" style={{marginBottom:"10px"}}>
       <span class="user-icon">👤</span>
-      <Link to="/login" className="noStyleLink" >Login</Link>
+      <Link to="/login" className="noStyleLink" >{username=="" ? <p>Login</p> : <p>{username}</p>}</Link>
       {/* <span class="user-name">Fenil Lad</span> */}
     </div>
     

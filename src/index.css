@@ -144,6 +144,7 @@ form {
 }
 .primaryBtn {
   border: 0;
+ 
   background: none;
   display: block;
   margin: 20px auto;
@@ -154,6 +155,24 @@ form {
   border-radius: 14px;
   transition: 0.5s ease-in-out;
   cursor: pointer;
+}
+.signupBtn {
+  border: 0;
+  background: none;
+  height: 50px;
+  text-align: center;
+  border: 2px solid skyblue;
+  width: 45%;
+  margin-left: 10px;
+  outline: none;
+  border-radius: 14px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.signupBtn:hover{
+  background-color: skyblue;
+  color: #fff;
+  transform: scale(1.1);
 }
 .buyNow {
   border: 0;
