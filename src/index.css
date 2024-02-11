@@ -44,6 +44,9 @@ code {
   position: "absolute";
   left: "2%";
 }
+.cartItemInfo{
+  height: 200px;
+}
 .productContainer {
   margin-top: 50px;
   margin-left: 120px;
@@ -183,7 +186,7 @@ form {
   color: #fff;
   transform: scale(1.1);
 }
-.buyNow:hover {
+.buyNow:hover, .buy-Now:hover {
   border: 0;
   background-color: burlywood;
   color: white;
@@ -241,10 +244,10 @@ form {
 height: 50px;  
  display: flex;
  margin-top: 20px;
- 
 }
 
-.buy-Now{
+.buy-Now
+{
   border: 0;
   background: none;
   margin-left: 20px;

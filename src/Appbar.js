@@ -42,10 +42,11 @@ function Appbar() {
       >
         search
       </button>
-      <a href="#home">Home</a>
-      <a href="">MyCart</a>
-      <a href="About">About</a>
-     
+      
+      <a href="/home" className="noStyleLink" >Home</a>
+      <Link to="/cart" className="noStyleLink" >Cart</Link>
+      <a href="/About" className="noStyleLink" >About</a>
+      <Link to="/profile" className="noStyleLink" >Edit profile</Link>
     </div>
 
     <div class="user-profile" style={{marginBottom:"23px"}}>
