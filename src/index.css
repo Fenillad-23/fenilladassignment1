@@ -56,13 +56,13 @@ code {
 }
 
 .item {
-  flex-basis: calc(33.33% - 5%);
+  flex-basis: calc(33.33% - 8%);
   height: 530px;
   border-radius: 30px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   padding: 10px;
-  margin-left: 20px;
+  margin-left: 40px;
   margin-bottom: 40px;
   margin-right: 40px;
 }
@@ -189,6 +189,70 @@ form {
   color: white;
 
   transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.infoProduct{
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 80PX;
+}
+.infoItemImg{
+  height: 350px;
+  width: 350px;
+  margin-right: 200px;
+  margin-left: 200px;
+}
+.productRating{
+  display: flex;
+  
+}
+.productRating span{
+  color: greenyellow;
+}
+.itemColor{
+  display: flex;
+}
+
+.color-switch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.color-switch.red {
+  background-color: red;
+}
+
+.color-switch.blue {
+  background-color: blue;
+}
+
+.color-switch.green {
+  background-color: green;
+}
+.color-switch.black {
+  background-color: black;
+}
+.quantity{
+height: 50px;  
+ display: flex;
+ margin-top: 20px;
+ 
+}
+
+.buy-Now{
+  border: 0;
+  background: none;
+  margin-left: 20px;
+  width: 200px;
+  text-align: center;
+  border: 2px solid burlywood;
+  outline: none;
+  border-radius: 10px;
   transition: 0.5s ease-in-out;
   cursor: pointer;
 }

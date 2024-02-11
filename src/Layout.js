@@ -1,7 +1,7 @@
 // Layout.js
 
 import React from "react";
-import Nav from "./navbar";
+import Nav from "./Appbar";
 
 function Layout({ children }) {
     console.log(children); 
