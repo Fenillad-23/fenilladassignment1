@@ -259,3 +259,27 @@ height: 50px;
   transition: 0.5s ease-in-out;
   cursor: pointer;
 }
+
+.cartProduct{
+  display: flex;
+  justify-Content: space-between;
+  background-Color: white;
+  height: 60px;
+  box-shadow:  0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 4px;
+  text-Align: center;
+  padding:20px
+}
+.cartProduct-detail{
+  display: flex;
+  margin-top: 20px;
+  justify-Content: space-between;
+  background-Color: white;
+  height: 80px;
+  box-shadow:  0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 4px;
+  text-Align: center;
+  padding:30px
+}

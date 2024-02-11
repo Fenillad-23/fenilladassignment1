@@ -1,20 +1,16 @@
-// Cart.js
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./Appbar";
-import { Link } from "react-router-dom";
-
 
 function Cart() {
-   let totalPrice = 0;
-    const [cartProduct, setCart] = useState([]);
-
-    useEffect(() => {
-      
-        const CartProducts = JSON.parse(localStorage.getItem("cart")) || [];
-        setCart(CartProducts);
-      }, []);
-
+  const [cartProduct, setCart] = useState([]);
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+  useEffect(() => {
+    const CartProducts = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(CartProducts);
+  }, []);
+  const quantity = 0 ;
   const removeFromCart = (index) => {
     const updatedCart = [...cartProduct];
     updatedCart.splice(index, 1);
@@ -22,65 +18,112 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const applyCoupon = () => {
+    if (coupon === "SALE20") {
+      setDiscount(0.2);
+    }
+  };
+
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cartProduct.forEach((item) => {
+      totalPrice = totalPrice + parseFloat(item.price);
+    });
+    return totalPrice;
+  };
+
   return (
     <>
       <Nav />
-      {/* <div >
-        <center><div className="card " style={{ widtr: "56rem",marginBottom:"10px" }}>
+      <div className="container">
         <h1>Your Cart</h1>
-          {cartProduct.map((item, index) => (
-            totalPrice = totalPrice+parseFloat(item.price),
-            
-            <div  style={{display:"flex",marginBottom:"20px",widtr:"100%" ,marginTop:"30px",marginBottom:"30px"}} key={index}>
-                
-              <div>
-                <img src={ item.imageUrl} style={{height:"150px" ,widtr:"150px",borderRadius:"10px"}} className="infoItemImg"  />
-              </div>
-              <div className="selectInfoItem"style={{height:"150px" ,widtr:"250px",borderRadius:"10px"}}>
-                <p>{ item.name}</p>
-                
-                <div>
-                  <h6>
-                    <p>${item.price}</p>
-                  </h6>
-                </div>
-                <div>
-                  <button className="btn btn-danger"onClick={()=>{removeFromCart(index)}}>Remove from Cart</button></div>
-              </div>
-              <div  class="btn-group mr-2" role="group">
-                
-              </div>
-              
+        <div className="cartProduct">
+          <div>
+            <p>
+              <b>product</b>
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>price</b>
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>quantity</b>
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>subtotal</b>
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>Action</b>
+            </p>
+          </div>
+        </div>
+        {cartProduct.map((item, index) => (
+          <div className="cartProduct-detail">
+            <div>
+              <img
+                src={item.imageUrl}
+                style={{ height: "45px", width: "50px" }}
+                alt={item.name}
+              />
             </div>
-         
-          ))}
-        </div></center>
-        <center><h5>total price: ${totalPrice}</h5></center>
-        <button className="primaryBtn">Proceed To pay</button>
-      </div> */}
-      <table class="container table table-striped table-light">
-  <thead>
-    <tr>
-  
-      <th scope="col">image</th>
-      <th scope="col">name</th>
-      <th scope="col">quantity</th>
-      <th scope="col">price</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {cartProduct.map((item,index)=>(<tr>
-      
-      <td><card><img src={item.imageUrl} style={{height:"100px", width:"100px", borderRadius:"10px"}}></img></card></td>
-      <td>{item.name}</td>
-      <td>{item.quantity}</td>
-      <td>{item.price}</td>
-      <td><button onClick={()=>{removeFromCart(index)}} type="submit" class="btn btn-danger">Remove from cart</button></td>
-    </tr>))}
-    
-  </tbody>
-</table>
+            <div>
+              {" "}
+              <p style={{ marginLeft: "100px" }}>{item.price}</p>
+            </div>
+            <div>
+              <p style={{ marginLeft: "150px" }}>
+                1
+              </p>
+            </div>
+            <div>
+              <p style={{ marginLeft: "150px" }}>{item.price}</p>
+            </div>
+            <div>
+              <button className="btn btn-primary" onClick={removeFromCart}>
+                Remove from cart
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <div>
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <input
+              type="text"
+              className="form-control"
+              style={{ height: "60px", widp: "230px" }}
+              placeholder="Enter coupon code"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+            />
+            &nbsp;&nbsp;
+            <button
+              className="btn btn-outline-info"
+              type="button"
+              onClick={applyCoupon}
+            >
+              Apply Coupon
+            </button>
+          </div>
+          <div className="row">
+            <div className="col-md-6  offset-md-3 text-center totalPrice">
+              <h4>Total Price: ${calculateTotalPrice()}</h4>
+            </div>
+          </div>
+        </div>
+        <div>
+          <center>
+            <button className="btn btn-danger mt-4">Proceed To Pay</button>
+          </center>
+        </div>
+      </div>
     </>
   );
 }
