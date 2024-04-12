@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import Nav from "./Appbar";
 
 function Cart() {
     let  finalCost = 0;
@@ -39,7 +37,6 @@ function Cart() {
 
   return (
     <>
-      <Nav />
       <div className="container">
         <h1>Your Cart</h1>
         <div className="cartProduct">

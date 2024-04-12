@@ -1,7 +1,7 @@
-import Nav from "./Appbar";
 import { useLocation } from "react-router-dom";
-import products from "./product.js";
+import products from "../Dummy_Data/product.js";
 import { useState } from "react";
+
 function ProductInfo() {
   const location = useLocation();
   const id = location.state.id;
@@ -12,7 +12,7 @@ function ProductInfo() {
 
   const increaseQuantity = () => {
     setProductQuantity(productQuantity + 1);
-    setProductPrice(productQuantity * parseInt(quantityPrice+1));
+    setProductPrice(productQuantity * parseInt(quantityPrice + 1));
   };
   const decreaseQuantity = () => {
     if (productQuantity > 1) {
@@ -20,12 +20,11 @@ function ProductInfo() {
       setProductPrice(quantityPrice * (productQuantity - 1)); // Update price by subtracting the product quantity
     }
   };
-  
+
 
   if (!product) {
     return (
       <>
-        <Nav />
         <div>
           <h2>Product not found</h2>
         </div>
@@ -35,7 +34,6 @@ function ProductInfo() {
 
   return (
     <>
-      <Nav />
       <div>
         <div className="infoProduct">
           <div>
@@ -64,15 +62,15 @@ function ProductInfo() {
             <hr></hr>
             <div className="itemColor">
               <b>Color:</b>&nbsp;&nbsp;
-              <div class="color-switch red"></div>
-              <div class="color-switch blue"></div>
-              <div class="color-switch green"></div>
-              <div class="color-switch black"></div>
+              <div className="color-switch red"></div>
+              <div className="color-switch blue"></div>
+              <div className="color-switch green"></div>
+              <div className="color-switch black"></div>
             </div>
             <div className="quantity">
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 onClick={decreaseQuantity}
               >
                 -
@@ -80,7 +78,7 @@ function ProductInfo() {
               &nbsp;
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 value={productQuantity}
                 style={{
                   width: "80px",
@@ -94,7 +92,7 @@ function ProductInfo() {
               &nbsp;
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 onClick={increaseQuantity}
               >
                 +
@@ -110,7 +108,7 @@ function ProductInfo() {
                 }}
               >
                 <center style={{ marginTop: "13px" }}>
-                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                  <i className="fa fa-heart-o" aria-hidden="true"></i>
                 </center>
               </div>
             </div>

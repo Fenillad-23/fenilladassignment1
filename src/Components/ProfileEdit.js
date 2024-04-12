@@ -1,7 +1,4 @@
-import "./App.css";
-
 import React from "react";
-import Nav from "./Appbar";
 
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -14,7 +11,6 @@ function Login() {
   // };
   return (
     <>
-      <Nav />
       <div className="mainDiv">
         <Form className="card divCard" style={{ padding: "5%" }}>
           <h1 style={{ marginBottom: "3%", color: "red" }}>
@@ -22,10 +18,10 @@ function Login() {
           </h1>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridEmail">
-              <div class="form-floating mb-2">
+              <div className="form-floating mb-2">
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   name="email"
                   value={"fenillad087@gmail.com"}
                   id="floatingInput"
@@ -126,14 +122,14 @@ function Login() {
               label="I accept terms and conditons for updating profile"
             />
           </Form.Group>
-          <div style={{float:"right"}}>
-          <button className="btn btn-outline-danger" type="submit">
+          <div style={{ float: "right" }}>
+            <button className="btn btn-outline-danger" type="submit">
               Cancel
             </button>&nbsp;&nbsp;
             <button className="btn btn-info" type="submit">
               Update Profile
             </button>
-           
+
           </div>
         </Form>
       </div>

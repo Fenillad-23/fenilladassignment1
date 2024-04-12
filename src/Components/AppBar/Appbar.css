@@ -1,0 +1,74 @@
+.menu-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.navbar {
+    background-color: black;
+    padding: 1px;
+    box-shadow: 0 2px 2px -2px rgba(0, 0.2, 0, 0.5);
+    position: fixed;
+    display: flex;
+    height: 80px;
+    top: 0;
+    width: 100%;
+}
+
+.nav {
+    float: left;
+    position: fixed;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu a,
+.brandInfo .brand {
+    margin-right: 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.brandInfo {
+    display: flex;
+    height: "30px";
+    position: "absolute";
+    left: "2%";
+}
+
+
+.brandInfo a {
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: black;
+}
+
+.user-profile {
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.noStyleLink {
+    text-decoration: none;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.logo {
+    height: 70px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    width: auto;
+    border-radius: 50%;
+}

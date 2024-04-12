@@ -1,4 +1,3 @@
-import "./App.css";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -16,8 +15,8 @@ function Login() {
       userInfo.password === "Fenil@2310"
     ) {
       localStorage.setItem("username", "Fenillad087@gmail.com");
-      window.location.href ="/home"
-    }else {
+      window.location.href = "/home"
+    } else {
       alert(
         "user not found\nhint\nuser name : Fenillad087@gmail.com   \npassword: Fenil@2310 "
       );
@@ -39,10 +38,10 @@ function Login() {
 
             <div className="col md-9" id="inputForm">
               <form onSubmit={singinUser}>
-                <div class="form-floating mb-2">
+                <div className="form-floating mb-2">
                   <input
                     type="email"
-                    class="form-control"
+                    className="form-control"
                     name="email"
                     id="floatingInput"
                     placeholder="name@example.com"
@@ -75,7 +74,7 @@ function Login() {
                   </button>
                   <div className="or" style={{ display: "flex", flex: "1" }}>
                     <hr style={{ width: "45%" }} />
-                    &nbsp;<p class="or">or</p>&nbsp;
+                    &nbsp;<p className="or">or</p>&nbsp;
                     <hr style={{ width: "45%" }} />
                   </div>
                   <Link className="noStyleLink">
@@ -83,7 +82,7 @@ function Login() {
                       <i
                         className="fa fa-google"
                         style={{ color: "blueviolet" }}
-                      ></i>{" "}
+                      ></i>{"  "}
                       Sign In with Google
                     </button>
                   </Link>

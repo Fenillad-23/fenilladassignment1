@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { Link } from "react-router-dom";
 function Registration() {
 
@@ -15,22 +13,22 @@ function Registration() {
       shippingAddress: formData.get("shippingAddress"),
       terms: formData.get("terms"),
     };
-    if ( userInfo.email === "" || userInfo.password === "" || userInfo.contactNumber === "" || userInfo.confirmPassword === "" || userInfo.terms!='on') {
+    if (userInfo.email === "" || userInfo.password === "" || userInfo.contactNumber === "" || userInfo.confirmPassword === "" || userInfo.terms != 'on') {
       alert("Please fill out all fields");
     } else {
       // alert("all fields filled successfully!"+userInfo.email);
-      if(userInfo.password !== userInfo.confirmPassword){
+      if (userInfo.password !== userInfo.confirmPassword) {
         return alert('Passwords do not match')
-      }else{
+      } else {
         window.location.href = "/home";
       }
 
     }
-    
+
   };
   return (
-  
-     <div className="mainDiv">
+
+    <div className="mainDiv">
       <div className="card divCard">
         <div>
           <center>
@@ -44,17 +42,17 @@ function Registration() {
 
           <div className="col md-9" id="inputForm">
             <form id="form" onSubmit={createUser}>
-              <div class="form-floating mb-2">
+              <div className="form-floating mb-2">
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   name="email"
                   id="floatingInput"
                   placeholder="name@example.com" />
                 <label for="floatingInput">Email address</label>
               </div>
 
-              <div class="form-floating mb-2">
+              <div className="form-floating mb-2">
                 <input
                   type="password"
                   className="form-control"
@@ -104,19 +102,19 @@ function Registration() {
               <br></br>
               <div className="row btn-wrapper">
                 <button
-                type="submit"
+                  type="submit"
 
                   className="primaryBtn"
                   id="btnRegister">
                   <img src="add-user.png" height={20} />&nbsp;&nbsp;
                   Sign Up
                 </button>
-                <Link  className="noStyleLink" to="/login">
-                    <button className="primaryBtn" id="btnLogin">
-                      <img src="login.png" height={20} />
-                      &nbsp;Sign In
-                    </button>
-                  </Link>
+                <Link className="noStyleLink" to="/login">
+                  <button className="primaryBtn" id="btnLogin">
+                    <img src="login.png" height={20} />
+                    &nbsp;Sign In
+                  </button>
+                </Link>
               </div>
             </form>
           </div>
