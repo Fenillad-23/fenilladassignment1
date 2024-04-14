@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import { callAPI } from "../Api";
 
 function Login() {
-  const singinUser = (e) => {
+  const singinUser = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -10,18 +11,18 @@ function Login() {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-    if (
-      userInfo.email === "Fenillad087@gmail.com" ||
-      userInfo.password === "Fenil@2310"
-    ) {
-      localStorage.setItem("username", "Fenillad087@gmail.com");
-      window.location.href = "/home"
+
+    const response = await callAPI("POST", "user/login", userInfo);
+
+    if(response.message) {
+      alert(response.message);
     } else {
-      alert(
-        "user not found\nhint\nuser name : Fenillad087@gmail.com   \npassword: Fenil@2310 "
-      );
+      localStorage.setItem("username", response.email);
+      console.log("user found", response);
+      window.location.href = "/home";
     }
   };
+  
   return (
     <>
       <div className="mainDiv">

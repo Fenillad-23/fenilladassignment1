@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-function Registration() {
+import { callAPI } from "../Api";
 
-  const createUser = (e) => {
+function Registration() {
+  const createUser = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -9,23 +10,28 @@ function Registration() {
       email: formData.get("email"),
       password: formData.get("password"),
       confirmPassword: formData.get("confirmPass"),
-      contactNumber: formData.get("contactNumber"),
+      contactNo: formData.get("contactNo"),
       shippingAddress: formData.get("shippingAddress"),
       terms: formData.get("terms"),
     };
-    if (userInfo.email === "" || userInfo.password === "" || userInfo.contactNumber === "" || userInfo.confirmPassword === "" || userInfo.terms != 'on') {
+
+    if (userInfo.email === "" || userInfo.password === "" || userInfo.contactNo === "" || userInfo.confirmPassword === "" || userInfo.terms != 'on') {
       alert("Please fill out all fields");
     } else {
       // alert("all fields filled successfully!"+userInfo.email);
       if (userInfo.password !== userInfo.confirmPassword) {
         return alert('Passwords do not match')
       } else {
+        delete userInfo.confirmPassword;
+        delete userInfo.terms;
+        const response = await callAPI("POST", "user/add", userInfo);
+        console.log("user added", response);
         window.location.href = "/home";
       }
 
     }
-
   };
+
   return (
 
     <div className="mainDiv">
@@ -76,7 +82,7 @@ function Registration() {
                   type="tel"
                   className="form-control"
                   id="lblMobile"
-                  name="contactNumber"
+                  name="contactNo"
                   placeholder="Enter  your mobile number" />
                 <label for="lblMobile">Mobile Number:</label>
               </div>

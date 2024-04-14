@@ -11,7 +11,7 @@ function Login() {
   // };
   return (
     <>
-      <div className="mainDiv">
+      <div className="mainDiv" style={{ marginTop: "0" }}>
         <Form className="card divCard" style={{ padding: "5%" }}>
           <h1 style={{ marginBottom: "3%", color: "red" }}>
             Edit Your Profile
