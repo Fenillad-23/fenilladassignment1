@@ -7,6 +7,7 @@ import ProductInfo from "./Components/ProductInfo.js";
 import Profile from "./Components/ProfileEdit.js";
 import Cart from "./Components/Cart.js";
 import Appbar from "./Components/AppBar/Appbar.js"
+import AddProduct from "./Components/Admin/AddProduct.js";
 
 export default function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/ProductInfo" element={<ProductInfo />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/addProduct" element={<AddProduct />} />
       </Routes>
     </>
   );

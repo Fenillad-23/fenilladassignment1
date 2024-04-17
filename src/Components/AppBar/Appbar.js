@@ -4,9 +4,10 @@ import './Appbar.css';
 
 function Appbar() {
   const username = localStorage.getItem("username") || "";
+  const isAdmin = username === "admin@gmail.com";
 
   return (
-    <nav className="navbar" style={{position: "fixed"}}>
+    <nav className="navbar" style={{ position: "fixed" }}>
 
       <div className="brandInfo">
         <img src="TRENDBAZAR.png" alt="Trend Bazar" className="logo" />
@@ -18,8 +19,10 @@ function Appbar() {
       <div className="menu-wrapper">
         <div className="menu">
           <a href="/home" className="noStyleLink" >Home</a>
-          <Link to="/cart" className="noStyleLink" >Cart</Link>
-          <a href="/About" className="noStyleLink" >About</a>
+          {isAdmin
+            ? (<><Link to="/addProduct" className="noStyleLink" >Add Product</Link></>)
+            : (<><Link to="/cart" className="noStyleLink" >Cart</Link>
+              <a href="/About" className="noStyleLink" >About</a></>)}
           <Link to="/profile" className="noStyleLink" >Edit profile</Link>
         </div>
 
