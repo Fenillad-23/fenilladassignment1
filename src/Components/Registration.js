@@ -25,6 +25,7 @@ function Registration() {
         delete userInfo.confirmPassword;
         delete userInfo.terms;
         const response = await callAPI("POST", "user/add", userInfo);
+        localStorage.setItem("username", userInfo.email);
         console.log("user added", response);
         window.location.href = "/home";
       }
