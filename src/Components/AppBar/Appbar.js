@@ -22,7 +22,7 @@ function Appbar() {
           {isAdmin
             ? (<><Link to="/addProduct" className="noStyleLink" >Add Product</Link></>)
             : (<><Link to="/cart" className="noStyleLink" >Cart</Link>
-              <a href="/About" className="noStyleLink" >About</a></>)}
+              <a href="/About" className="noStyleLink" >My Orders</a></>)}
           <Link to="/profile" className="noStyleLink" >Edit profile</Link>
         </div>
 

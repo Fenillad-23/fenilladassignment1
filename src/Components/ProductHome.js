@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import CartProduct from '../Dummy_Data/cartProduct.js';
 import { callAPI } from "../Api.js";
+// import { useHistory } from "react-router-dom";
 
 function ProductionHome() {
+  // const history = useHistory();
   const [products, setProducts] = useState([]);
   const isAdmin = localStorage.getItem("username") === "admin@gmail.com";
   const navigate = useNavigate();
@@ -28,6 +30,9 @@ function ProductionHome() {
       }
       getProductDetails();
       return;
+    }else{
+      // history.push("/order",{pid:id,productInfo:[products[index]]})
+
     }
 
     navigate("/ProductInfo", { state: { id: index } });
@@ -36,7 +41,7 @@ function ProductionHome() {
 
   const addCart = (item) => {
     if (isAdmin) {
-      navigate("/addProduct", { state: { currentItem: item } })
+      navigate("/editProduct", { state: { currentItem: item } })
     }
 
     CartProduct.push(item);

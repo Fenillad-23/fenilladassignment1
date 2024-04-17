@@ -8,7 +8,8 @@ import Profile from "./Components/ProfileEdit.js";
 import Cart from "./Components/Cart.js";
 import Appbar from "./Components/AppBar/Appbar.js"
 import AddProduct from "./Components/Admin/AddProduct.js";
-
+import EditProduct from "./Components/Admin/EditProduct.js";
+import CheckOut from "./Components/order.js"
 export default function App() {
   const location = useLocation();
 
@@ -24,6 +25,8 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/addProduct" element={<AddProduct />} />
+        <Route path="/editProduct" element={<EditProduct />} />
+        <Route path="/order" element={<CheckOut />} />
       </Routes>
     </>
   );

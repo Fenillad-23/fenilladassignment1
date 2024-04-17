@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import ErrorModal from "./ErrorModal";
+import React, {useState}from "react";
 import { callAPI } from "../Api";
 
 function Login() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
   const singinUser = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,10 +28,15 @@ function Login() {
     const response = await callAPI("POST", "user/login", userInfo);
 
     if(response.message) {
-      alert(response.message);
+      setErrorMessage(response.message);
+      setIsModalOpen(true);
     } else {
+
       localStorage.setItem("username", response.email);
-      console.log("user found", response);
+      localStorage.setItem("shppingAddress", response.shippingAddress);
+      localStorage.setItem("id", response._id);
+      
+      // alert("user found"+ response);
       window.location.href = "/home";
     }
   };
@@ -101,7 +113,9 @@ function Login() {
                     </button>
                   </Link>
                 </div>
+                <ErrorModal isOpen={isModalOpen} errorMessage={errorMessage} onClose={handleModalClose} />
               </form>
+
             </div>
           </div>
         </div>

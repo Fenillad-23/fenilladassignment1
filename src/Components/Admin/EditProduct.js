@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 
-function AddProduct() {
+function EditProduct() {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [productInfo, setProductInfo] = useState({
@@ -15,6 +16,17 @@ function AddProduct() {
         price: '',
         rating: ''
     });
+
+    const location = useLocation();
+    let currentItem;
+    if(location.state.currentItem) {
+        currentItem = location.state.currentItem;
+    }
+    
+
+    useEffect(() => {
+        setProductInfo({ ...currentItem })
+    }, [currentItem]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,10 +45,10 @@ function AddProduct() {
     const AddProduct = async (e) => {
         e.preventDefault();
 
-        if (!image) {
-            console.error('Please select an image.');
-            return;
-        }
+        // if (!image) {
+        //     console.error('Please select an image.');
+        //     return;
+        // }
 
         const formData = new FormData();
         formData.append('name', productInfo.name);
@@ -44,24 +56,30 @@ function AddProduct() {
         formData.append('specifications', productInfo.specifications);
         formData.append('price', productInfo.price);
         formData.append('rating', productInfo.rating);
-        formData.append('image', image)
+        console.log("current item id---------------------------"+currentItem?._id);
+        console.log("current item id---------------------------"+currentItem?._id);
+      //  formData.append('image', image || productInfo.image);
 
-        try {
-            const response = await fetch('http://localhost:5001/product/add', {
-                method: 'POST',
-                body: formData
-            });
+            try {
+                const response = await fetch(`http://localhost:5001/product/${currentItem?._id}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+                console.log("response---------------------------"+response.statusCode);
+                if (response.statusText == "OK") {
+                    const data = await response.json();
+                    navigate("/home");
+                    console.log('Product edited successfully:', data);
+                } else {
+                    console.error('Failed to edit product:', response.statusText);
+                }
 
-            if (response.ok) {
-                const data = await response.json();
-                navigate("/home");
-                console.log('Product added successfully:', data);
-            } else {
-                console.error('Failed to add product:', response.statusText);
+                return;
+            } catch (error) {
+                console.error('Error editing product:', error.message);
             }
-        } catch (error) {   
-            console.error('Error adding product:', error.message);
-        }
+
+        
     };
 
     return (
@@ -69,7 +87,7 @@ function AddProduct() {
             <div className="mainDiv" style={{ marginTop: "0" }}>
                 <form className="card divCard" style={{ padding: "5%" }} onSubmit={AddProduct} >
                     <h1 style={{ marginBottom: "3%", color: "red" }}>
-                        Add Product
+                    Edit Product
                     </h1>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
@@ -80,6 +98,7 @@ function AddProduct() {
                                     name="name"
                                     id="floatingInput"
                                     onChange={handleChange}
+                                    value={productInfo.name}
                                     placeholder="Enter product Name"
                                 />
                                 <label for="floatingInput">Product Name</label>
@@ -92,6 +111,7 @@ function AddProduct() {
                                     type="text"
                                     className="form-control"
                                     name="category"
+                                    value={productInfo.category}
                                     onChange={handleChange}
                                     placeholder="Enter product category"
                                 />
@@ -100,7 +120,7 @@ function AddProduct() {
                         </Form.Group>
                     </Row>
 
-                    <Form.Group className="mb-3" controlId="formGridImage">
+                    {/* <Form.Group className="mb-3" controlId="formGridImage">
                         <div className="mb-2">
                             <input
                                 type="file"
@@ -110,7 +130,7 @@ function AddProduct() {
                                 onChange={handleImageChange}
                             />
                         </div>
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group className="mb-3" controlId="formGridAddress2">
                         <div className="form-floating mb-2">
@@ -118,6 +138,7 @@ function AddProduct() {
                                 type="text"
                                 className="form-control"
                                 name="specifications"
+                                value={productInfo.specifications}
                                 onChange={handleChange}
                                 placeholder="Enter Product specifications"
                             />
@@ -135,6 +156,7 @@ function AddProduct() {
                                     type="text"
                                     className="form-control"
                                     name="price"
+                                    value={productInfo.price}
                                     onChange={handleChange}
                                     placeholder="Enter Product Price"
                                 />
@@ -148,6 +170,7 @@ function AddProduct() {
                                 <Form.Select
                                     defaultValue="5"
                                     name="rating"
+                                    value={productInfo.rating}
                                     onChange={handleChange}
                                     style={{ height: "58px" }}
                                 >
@@ -168,7 +191,7 @@ function AddProduct() {
                             Cancel
                         </button>&nbsp;&nbsp;
                         <button className="btn btn-info">
-                            Add Product
+                        Save Changes
                         </button>
 
                     </div>
@@ -178,4 +201,4 @@ function AddProduct() {
     );
 }
 
-export default AddProduct;
+export default EditProduct;
