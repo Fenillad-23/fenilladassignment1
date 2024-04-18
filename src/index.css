@@ -282,4 +282,45 @@ form {
   text-Align: center;
   padding: 30px
 }
+.comment-row {
+  display: flex;
+  align-items: flex-start; /* Align items vertically at the start */
+  margin-bottom: 16px; /* Add space between comments */
+}
 
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  margin-right: 16px; 
+}
+
+.comment-info {
+  display: flex;
+  flex-direction: column; 
+}
+
+.comment-user {
+  font-weight: bold;
+  margin-bottom: 4px; 
+}
+
+.comment-text {
+  margin: 0; 
+}
+.custom-input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 5px 0;
+}
+
+.custom-input:focus {
+  border-color: #065fd4;
+  box-shadow: none;
+}
+.add-comment{
+  display: flex;
+  flex-direction: column; 
+}

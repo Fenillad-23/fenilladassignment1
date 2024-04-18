@@ -68,7 +68,7 @@ function EditProduct() {
                 console.log("response---------------------------"+response.statusCode);
                 if (response.statusText == "OK") {
                     const data = await response.json();
-                    navigate("/home");
+                    navigate("/v_a_Products");
                     console.log('Product edited successfully:', data);
                 } else {
                     console.error('Failed to edit product:', response.statusText);

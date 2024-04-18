@@ -54,7 +54,7 @@ function AddProduct() {
 
             if (response.ok) {
                 const data = await response.json();
-                navigate("/home");
+                navigate("/v_a_Products");
                 console.log('Product added successfully:', data);
             } else {
                 console.error('Failed to add product:', response.statusText);

@@ -21,7 +21,7 @@ function Login() {
 
     if(userInfo.email === "admin@gmail.com" && userInfo.password === "Admin"){
       localStorage.setItem("username", userInfo.email);
-      window.location.href = "/home";
+      window.location.href = "/v_a_Products";
       return;
     }
 

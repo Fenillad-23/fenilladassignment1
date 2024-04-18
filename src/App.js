@@ -10,6 +10,7 @@ import Appbar from "./Components/AppBar/Appbar.js"
 import AddProduct from "./Components/Admin/AddProduct.js";
 import EditProduct from "./Components/Admin/EditProduct.js";
 import CheckOut from "./Components/order.js"
+import ProductView from "./Components/Admin/adminViewProductHome.js";
 export default function App() {
   const location = useLocation();
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/addProduct" element={<AddProduct />} />
         <Route path="/editProduct" element={<EditProduct />} />
         <Route path="/order" element={<CheckOut />} />
+        <Route path="/v_a_Products" element={<ProductView />} />
       </Routes>
     </>
   );
