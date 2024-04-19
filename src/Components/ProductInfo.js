@@ -169,16 +169,25 @@
 
 // export default ProductInfo;
 // import avatarImage from 'public/avatar.jpg';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { callAPI } from "../Api";
+import ErrorModal from "./ErrorModal";
 
 function ProductInfo() {
   const location = useLocation();
+  const navigate = useNavigate();
   const id = location.state.id;
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [productQuantity, setProductQuantity] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -192,32 +201,34 @@ function ProductInfo() {
       }
     }
 
-  
-  async function fetchComments() {
-    try {
-      const getCommentData = await fetch("http://localhost:5001/comment");
-      const commentData = await getCommentData.json();
-      const productComments = commentData.filter(
-        (comment) => comment.productId === id
-      );
 
-      
-      const updatedComments = await Promise.all(
-        productComments.map(async (comment) => {
-          const userName = await fetchUser(comment.userId);
-          return { ...comment, userName  };
-        })
-      );
+    async function fetchComments() {
+      try {
+        const getCommentData = await fetch("http://localhost:5001/comment");
+        const commentData = await getCommentData.json();
+        const productComments = commentData.filter(
+          (comment) => comment.productId === id
+        );
 
-      setComments(updatedComments);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
+
+        const updatedComments = await Promise.all(
+          productComments.map(async (comment) => {
+            const userName = await fetchUser(comment.userId);
+            return { ...comment, userName };
+          })
+        );
+
+        setComments(updatedComments);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
     }
-  }
 
-  fetchData();
-  fetchComments();
-}, [id]);
+    fetchData();
+    fetchComments();
+  }, [id]);
+
+  const ratingArray = Array.from({ length: product?.rating });
 
   async function fetchUser(userId) {
     try {
@@ -229,6 +240,7 @@ function ProductInfo() {
       return null;
     }
   }
+
   const increaseQuantity = () => {
     setProductQuantity(productQuantity + 1);
   };
@@ -238,9 +250,50 @@ function ProductInfo() {
       setProductQuantity(productQuantity - 1);
     }
   };
+
   async function handleSubmitComment(event) {
     event.preventDefault();
-   
+  }
+
+  async function addProductToCart() {
+    if (productQuantity < 1) {
+      setErrorMessage("Quantity must be a positive number");
+      setIsModalOpen(true);
+      return;
+    }
+
+    const id = localStorage.getItem("id");
+    const getUserData = await fetch(`http://localhost:5001/user/${id}`);
+    const userData = await getUserData.json();
+
+    const oldCartDetails = userData.cartProducts || [];
+    let updatedCartDetails = oldCartDetails.map(item => {
+      if (item.productId === product._id) {
+        return {
+          ...item,
+          quantity: item.quantity + productQuantity
+        };
+      } else {
+        return item;
+      }
+    });
+
+    if (!oldCartDetails.some(item => item.productId === product._id)) {
+      updatedCartDetails.push({
+        productId: product._id,
+        quantity: productQuantity
+      });
+    }
+
+    const newCartDetails = { cartProducts: updatedCartDetails };
+    const response = await callAPI("PUT", `user/${id}`, newCartDetails)
+
+    if (response.statusCode !== 200 && response.message) {
+      setErrorMessage(response.message);
+      setIsModalOpen(true);
+    } else {
+      navigate("/home");
+    }
   }
 
   if (!product) {
@@ -266,17 +319,18 @@ function ProductInfo() {
             <div>
               <h4>Comments:</h4>
               <div>
-              <form onSubmit={handleSubmitComment}>
-              <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@{localStorage.getItem('username')}</div>
-        </div>
-        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="add Comment"/>
-      </div>
-                <button type="submit" className="btn btn-info">Post Comment</button>
-              </form>
+                <form onSubmit={handleSubmitComment}>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">@{localStorage.getItem('username')}</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="add Comment" />
+                  </div>
+                  <button type="submit" className="btn btn-info">Post Comment</button>
+                  <ErrorModal isOpen={isModalOpen} errorMessage={errorMessage} onClose={handleModalClose} />
+                </form>
                 {comments.map((comment, index) => (
-                 
+
                   <div className="comment-row" key={index}>
                     <img
                       src="profile.png"
@@ -296,18 +350,18 @@ function ProductInfo() {
           <div className="selectInfoItem">
             <h3>{product.name}</h3>
             <div className="productRating">
-              {product.rating}
+              {ratingArray.map(() => (`⭐`))}
               <p>
-                (150 reviews) |&nbsp; <span>InStock</span>{" "}
+                &nbsp;(150 reviews) |&nbsp; <span>InStock</span>{" "}
               </p>
             </div>
             <div>
-              <h2>{/* <p>${quantityPrice}</p> */}</h2>
+              <h2><p>${productQuantity * product.price}</p></h2>
             </div>
 
             <div>
               <p>
-                <b>{product.category}</b>&nbsp;|&nbsp;{product.specification}
+                <b>{product.category}</b>&nbsp;|&nbsp;{product.specifications}
                 &nbsp;&nbsp;
               </p>
             </div>
@@ -349,7 +403,7 @@ function ProductInfo() {
               >
                 +
               </button>
-              <button className="buy-Now">Check Out</button>
+              <button className="buy-Now" onClick={addProductToCart}>Add to Cart</button>
               <div
                 style={{
                   height: "50px",
@@ -378,9 +432,9 @@ function ProductInfo() {
                   src="delivery.png"
                   style={{ height: "25px", width: "25px" }}
                 />
-                &nbsp;Free Shipping
+                &nbsp;Shipping Address
                 <br />
-                <a href="#">Enter your shipping details for delivery </a>
+                {localStorage.getItem("shppingAddress")}
                 <hr></hr>
                 <div>
                   <img

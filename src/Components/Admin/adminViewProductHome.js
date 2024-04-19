@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { callAPI } from "C:/Users/fenil/fenilladassignment1/src/Api.js";
+import { callAPI } from "../../Api";
 import "./adminSide.css"; // Import your CSS file
 
 function ProductView() {

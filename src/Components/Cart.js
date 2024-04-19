@@ -1,94 +1,117 @@
 import React, { useEffect, useState } from "react";
+import { callAPI } from "../Api";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
-    let  finalCost = 0;
+  let finalCost = 0;
+  const navigate = useNavigate();
   const [cartProduct, setCart] = useState([]);
+  const [cartDetails, setCartDetails] = useState([]);
   const [coupon, setCoupon] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [totalQty, setTotalQty] = useState("");
+  const [discountApplied, setDiscountApplied] = useState(false);
   let [discount, setDiscount] = useState(0);
+
   useEffect(() => {
-    const CartProducts = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(CartProducts);
+    fetchCartData();
   }, []);
- 
-  const removeFromCart = (index) => {
-    const updatedCart = [...cartProduct];
-    updatedCart.splice(index, 1);
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+  const fetchCartData = async () => {
+    const id = localStorage.getItem("id");
+    const getUserData = await fetch(`http://localhost:5001/user/${id}`);
+    const userData = await getUserData.json();
+    const cart = userData.cartProducts || [];
+    let totalPrice = 0;
+    let totalqty = 0;
+
+    const productPromises = cart.map(async (item) => {
+      const getProductData = await fetch(
+        `http://localhost:5001/product/${item.productId}`
+      );
+      const productData = await getProductData.json();
+      totalPrice = totalPrice + parseFloat(item.quantity * productData.price);
+      totalqty = totalqty + item.quantity;
+      
+      return { ...productData, qty: item.quantity };
+    });
+
+    const products = await Promise.all(productPromises);
+
+    setCartDetails(cart);
+    setCart(products);
+    setTotalPrice(totalPrice.toFixed(2));
+    setTotalQty(totalqty);
+  };
+
+  const removeFromCart = async (id) => {
+    const userId = localStorage.getItem("id");
+    const cartWithRemovedItem = cartDetails.filter(
+      (item) => item.productId !== id
+    );
+    await callAPI("PUT", `user/${userId}`, {
+      cartProducts: cartWithRemovedItem,
+    });
+    fetchCartData();
   };
 
   const applyCoupon = () => {
-    if (coupon === "SALE20") {
-        discount = 0.2 ;
+    if (coupon === "SALE20" && !discountApplied) {
+      discount = 0.2;
       setDiscount(discount);
-     const discountAmount = discount * calculateTotalPrice();
-    finalCost = calculateTotalPrice() - discountAmount;
+      const discountAmount = discount * totalPrice;
+      finalCost = totalPrice - discountAmount;
+      setTotalPrice(finalCost.toFixed(2));
       alert(`You got a 20% discount! Your total price is ${finalCost}`);
+
+      setDiscountApplied(true);
+    } else if (coupon === "SALE20") {
+      alert("You already use this coupon");
     }
   };
 
-  const calculateTotalPrice = () => {
-    let totalPrice = 0;
-    cartProduct.forEach((item) => {
-      totalPrice = totalPrice + parseFloat(item.price);
-    });
-    return totalPrice;
-  };
+  const proceedToPayHandler = () => {
+    navigate("/orderSummary", { state: { quantity: totalQty, totalPrice }});
+  }
 
   return (
     <>
       <div className="container">
-        <h1>Your Cart</h1>
+        <h1 style={{margin: "20px 0 12px 0"}}>Your Cart</h1>
         <div className="cartProduct">
           <div>
-            <p>
-              <b>product</b>
-            </p>
+            <b>product</b>
           </div>
           <div>
-            <p>
-              <b>price</b>
-            </p>
+            <b>price</b>
           </div>
           <div>
-            <p>
-              <b>quantity</b>
-            </p>
+            <b>quantity</b>
           </div>
           <div>
-            <p>
-              <b>subtotal</b>
-            </p>
+            <b>subtotal</b>
           </div>
-          <div>
-            <p>
-              <b>Action</b>
-            </p>
+          <div style={{ width: "152px" }}>
+            <b>Action</b>
           </div>
         </div>
         {cartProduct.map((item, index) => (
           <div className="cartProduct-detail">
             <div>
               <img
-                src={item.imageUrl}
+                src={item.image}
                 style={{ height: "45px", width: "50px" }}
                 alt={item.name}
               />
             </div>
+            <div>{item.price}</div>
+            <div>{item.qty}</div>
+            <div>{item.price}</div>
             <div>
-              {" "}
-              <p style={{ marginLeft: "100px" }}>{item.price}</p>
-            </div>
-            <div>
-              <p style={{ marginLeft: "150px" }}>
-                1
-              </p>
-            </div>
-            <div>
-              <p style={{ marginLeft: "150px" }}>{item.price}</p>
-            </div>
-            <div>
-              <button className="btn btn-primary" onClick={removeFromCart}>
+              <button
+                className="btn btn-primary"
+                onClick={() => removeFromCart(item._id)}
+              >
                 Remove from cart
               </button>
             </div>
@@ -116,13 +139,13 @@ function Cart() {
           </div>
           <div className="row">
             <div className="col-md-6  offset-md-3 text-center totalPrice">
-              <h4>Total Price: ${finalCost == 0 ?  calculateTotalPrice():finalCost}</h4>
+              <h4 style={{marginTop: "16px"}}>Total Price: ${totalPrice}</h4>
             </div>
           </div>
         </div>
         <div>
           <center>
-            <button className="btn btn-danger mt-4">Proceed To Pay</button>
+            <button className="btn btn-danger mt-4" onClick={proceedToPayHandler}>Proceed To Pay</button>
           </center>
         </div>
       </div>

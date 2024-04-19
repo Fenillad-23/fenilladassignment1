@@ -127,12 +127,7 @@ function ProductionHome() {
   }
 
   const addCart = (item) => {
-    CartProduct.push(item);
-    localStorage.setItem("cart", JSON.stringify(CartProduct));
-  };
-
-  const buttonClickHandler = (id) => {
-    navigate("/ProductInfo", { state: { id: id } });
+    navigate("/ProductInfo", { state: { id: item._id } });
   };
 
   return (
@@ -153,9 +148,6 @@ function ProductionHome() {
             <div style={{ display: "flex", alignItems: "flex-start", flexWrap: "wrap", gap: "8px" }}>
               <button className="primaryBtn" style={{ height: "48px", fontSize: "16px", padding: "0 8px", flex: 1 }} onClick={() => addCart(item)}>
                 <i className="fa solid fa-shopping-cart"></i> Add to Cart
-              </button>
-              <button type="submit" className="buyNow" style={{ height: "48px", fontSize: "16px", padding: "0 8px", flex: 1 }} onClick={() => buttonClickHandler(item._id)}>
-                Buy Now
               </button>
             </div>
           </div>

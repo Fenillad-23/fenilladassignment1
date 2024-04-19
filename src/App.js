@@ -11,6 +11,8 @@ import AddProduct from "./Components/Admin/AddProduct.js";
 import EditProduct from "./Components/Admin/EditProduct.js";
 import CheckOut from "./Components/order.js"
 import ProductView from "./Components/Admin/adminViewProductHome.js";
+import OrderSummary from "./Components/orderSummary.js";
+import OrderList from "./Components/orderList.js";
 export default function App() {
   const location = useLocation();
 
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/editProduct" element={<EditProduct />} />
         <Route path="/order" element={<CheckOut />} />
         <Route path="/v_a_Products" element={<ProductView />} />
+        <Route path="/orderSummary" element={<OrderSummary />} />
+        <Route path="/orderList" element={<OrderList />} />
       </Routes>
     </>
   );
