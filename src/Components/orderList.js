@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { callAPI } from "../Api";
-import { useNavigate } from "react-router-dom";
+// import { callAPI } from "../Api";
+// import { useNavigate } from "react-router-dom";
 
 function OrderList() {
   const [orderList, setOrderList] = useState(null);

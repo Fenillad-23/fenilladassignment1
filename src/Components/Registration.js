@@ -26,6 +26,9 @@ function Registration() {
         delete userInfo.terms;
         const response = await callAPI("POST", "user/add", userInfo);
         localStorage.setItem("username", userInfo.email);
+        // localStorage.setItem("username", response.email);
+        localStorage.setItem("shppingAddress", response.shippingAddress);
+        localStorage.setItem("id", response._id);
         console.log("user added", response);
         window.location.href = "/home";
       }

@@ -70,10 +70,11 @@ function Appbar() {
             : (<><Link to="/cart" className="noStyleLink" >Cart</Link>
               <a href="/orderList" className="noStyleLink" >My Orders</a></>)}
           <Link to="/profile" className="noStyleLink" >Edit profile</Link>
-          {isAdmin?<Link to="/profile" className="noStyleLink" >Sales Order</Link>:""}
+          {isAdmin?<Link to="/orderReport" className="noStyleLink" >Sales Order</Link>:""}
+          {/* {isAdmin?"":<Link to="/dummy" className="noStyleLink" >dummy page</Link>} */}
         </div>
 
-        <div className="user-profile" style={{ marginBottom: "10px" }}>
+        <div className="user-profile" style={{ marginBottom: "10px",  color:"black"}}>
           <span className="user-icon">👤</span>
           <span onClick={handleUsernameClick} className="noStyleLink" >{username === "" ? <p>Login</p> : <p>{username}</p>}</span>
         

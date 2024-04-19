@@ -1,0 +1,124 @@
+/* ProductINFO1.css */
+
+/* Container styling */
+.product-info {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+/* Left section - Product image */
+.product-image {
+  width: 65%;
+  border-radius: 8px;
+    object-fit: contain;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-top: 10%;
+  margin-left: 50%; /* Center the image within its container */
+}
+
+/* Right section - Product details */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the elements within the info division */
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.category-tag {
+  color: #007bff;
+}
+
+.product-specs {
+  margin-bottom: 10px;
+  font-style: italic;
+  text-align: center;
+}
+
+.price-quantity {
+  margin-bottom: 20px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-button {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.quantity-input {
+    width: 50px; /* Define the width of the input field */
+    text-align: center; /* Center the text inside the input field */
+    padding: 5px; /* Padding inside the input field */
+    margin-right: 10px; /* Margin on the right side */
+    border: 1px solid #ccc; /* Border style */
+    display: inline-block; /* Display as inline-block */
+}
+
+
+
+.add-to-cart {
+  background-color: #f0c14b;
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #a88734;
+  cursor: pointer;
+}
+
+.comments-section {
+  margin-top: 20px;
+  text-align: center; /* Center comments section */
+}
+
+.comments-header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.comments-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.comment-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-content {
+  flex-grow: 1;
+  text-align: center; /* Center the comment text */
+}
+
+.comment-user {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  margin: 0;
+}

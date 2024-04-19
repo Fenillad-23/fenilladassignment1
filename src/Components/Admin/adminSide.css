@@ -1,60 +1,73 @@
 .productTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .productTable th,
-  .productTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .productTable th {
-    background-color: #f2f2f2;
-  }
-  
-  .productImage {
-    width: 100px;
-    height: auto;
-  }
-  
-  .productList {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .productItem {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-  
-  .productItem img {
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  .productInfo {
-    flex: 1;
-  }
-  
-  .productButtons button {
-    margin-left: 10px;
-  }
-  
-  .editButton,
-  .deleteButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .deleteButton {
-    background-color: #dc3545;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productTable th,
+.productTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.productTable th {
+  background-color: #f2f2f2;
+}
+
+.productImage {
+  width: 50%;
+  height: 200px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.action{
+  width: 12%;
+}
+.productList {
+  list-style: none;
+  padding: 0;
+  width: 50%;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.productItem img {
+  width: 100%;
+  height: 200px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productButtons button {
+  margin-left: 10px;
+}
+
+.editButton,
+.deleteButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+}

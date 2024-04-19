@@ -47,7 +47,7 @@ function ProductView() {
               <td>{item.name}</td>
               <td>{item.specifications}</td>
               <td>${item.price}</td>
-              <td>
+              <td className="action">
                 <button className="editButton" onClick={() => navigate("/editProduct", { state: { currentItem: item } })}>Edit</button>&nbsp;
                 <button className="deleteButton" onClick={() => buttonClickHandler(item._id)}>Delete</button>
               </td>

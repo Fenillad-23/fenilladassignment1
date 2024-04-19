@@ -137,11 +137,11 @@ function ProductionHome() {
         return (
           <div className="item" key={index}>
             <img src={item.image} alt="Avatar" className="itemImg" />
-            <h4><b>{item.name}</b></h4>
+            <h4 className="item-specificationName"><b>{item.name}</b></h4>
             <p className="item-specification">{item.specifications}</p>
             <b>
-              <p style={{ display: "flex", height: "40px" }}>${item.price}&nbsp;&nbsp;</p>
-              <p style={{ display: "flex", height: "10px" }}>
+              <p className="item-specification">${item.price}&nbsp;&nbsp;</p>
+              <p className="item-specification">
                 {ratingArray.map(() => (`⭐`))}
               </p>
             </b>

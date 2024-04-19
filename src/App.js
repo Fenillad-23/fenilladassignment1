@@ -13,9 +13,10 @@ import CheckOut from "./Components/order.js"
 import ProductView from "./Components/Admin/adminViewProductHome.js";
 import OrderSummary from "./Components/orderSummary.js";
 import OrderList from "./Components/orderList.js";
+import OrdersReport from "./Components/Admin/OrderReport.js";
+// import ProductINFO1 from "./Components/ProductINFO1.js";
 export default function App() {
   const location = useLocation();
-
   return (
     <>
       {location.pathname !== "/login" && location.pathname !== '/register' && <Appbar />}
@@ -33,6 +34,8 @@ export default function App() {
         <Route path="/v_a_Products" element={<ProductView />} />
         <Route path="/orderSummary" element={<OrderSummary />} />
         <Route path="/orderList" element={<OrderList />} />
+        <Route path="/orderReport" element={<OrdersReport />} />
+        {/* <Route path="/dummy" element={<ProductINFO1 />} /> */}
       </Routes>
     </>
   );
